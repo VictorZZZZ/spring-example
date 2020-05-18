@@ -42,6 +42,13 @@ public class MainController {
         return "details";
     }
 
+    @GetMapping("/find_by_title")
+    public String detailsPageByTitle(Model model, @RequestParam("title") String title){
+        Product selectedProduct = productService.getProductByTitle(title);
+        model.addAttribute("selectedProduct",selectedProduct);
+        return "details";
+    }
+
     @GetMapping("/products/delete/{id}")
     public String deleteProductById(@PathVariable("id") Long id){
         productService.deleteProductById(id);

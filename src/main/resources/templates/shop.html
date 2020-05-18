@@ -11,6 +11,7 @@
 </head>
 <body>
 <div class="container">
+    <div th:replace="~{navigation :: navigation(Shop)}" />
 
     <h1>Shop</h1>
 
@@ -32,6 +33,7 @@
                 <td th:text="${product.title}" />
                 <td th:text="${product.price}" />
                 <td><a class="btn btn-info" th:href="@{'/details/' + ${product.id}}" />Details</a></td>
+                <td><a class="btn btn-success" th:href="@{'/cart/add/' + ${product.id}}" />Add To Cart</a></td>
                 <td><a class="btn btn-danger" th:href="@{'/products/delete/' + ${product.id}}" />Delete</a></td>
             </tr>
         </tbody>

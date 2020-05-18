@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Application</title>
+    <title>Cart Page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -11,8 +11,30 @@
 </head>
 <body>
 <div class="container">
-    <div th:replace="~{navigation :: navigation(Home)}" />
-    <h1>Application</h1>
+    <div th:replace="~{navigation :: navigation(Cart)}" />
+
+    <h1>Shopping Cart</h1>
+
+    <span th:if="${products.size() == 0}">Cart is empty</span>
+
+    <table class="table table-hover" th:if="${products.size() > 0}">
+        <thead class="thead-dark">
+        <tr>
+            <td> Id </td>
+            <td> Title </td>
+            <td> Price </td>
+            <td> Actions </td>
+            <td> Actions </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}" />
+            <td th:text="${product.title}" />
+            <td th:text="${product.price}" />
+        </tr>
+        </tbody>
+    </table>
 
 </div>
 </body>
