@@ -1,7 +1,9 @@
 package com.geekbrains.springwebapp.controllers;
 
 import com.geekbrains.springwebapp.entities.Product;
+import com.geekbrains.springwebapp.entities.User;
 import com.geekbrains.springwebapp.services.ProductService;
+import com.geekbrains.springwebapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,12 @@ public class MainController {
     //http://localhost:8189/app/index
 
     private ProductService productService;
+    private UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Autowired
     public void setProductService(ProductService productService) {
@@ -25,13 +33,24 @@ public class MainController {
 
     @GetMapping("/index")
     public String homePage(){
+        Product product = productService.getProductById(2L);
+        System.out.println(product);
         return "index";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
     }
 
     @GetMapping("/shop")
     public String shopPage(Model model){
         List<Product> allProducts = productService.getAllProducts();
         model.addAttribute("products",allProducts);
+
+        User user = userService.findByUsername("geek");
+        System.out.println(user);
+
         return "shop";
     }
 

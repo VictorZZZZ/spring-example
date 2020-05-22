@@ -12,6 +12,8 @@
 <body>
 <div class="container">
 
+    <div th:replace="~{navigation :: navigation(Home)}" />
+
     <h1>Details</h1>
     <span th:text="${selectedProduct.id + ' ' + selectedProduct.title + ' '+ selectedProduct.price}" ></span>
 

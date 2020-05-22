@@ -1,5 +1,6 @@
 package com.geekbrains.springwebapp.utils;
 
+import com.geekbrains.springwebapp.entities.OrderItem;
 import com.geekbrains.springwebapp.entities.Product;
 import com.geekbrains.springwebapp.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.List;
 @Component
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ShoppingCart {
-    private List<Product> products;
+    private List<OrderItem> items;
     private ProductService productService;
 
     @Autowired
@@ -23,17 +24,19 @@ public class ShoppingCart {
         this.productService = productService;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public List<OrderItem> getItems() {
+        return items;
     }
 
     @PostConstruct
     public void init(){
-        products = new ArrayList<>();
+        items = new ArrayList<>();
     }
 
     public void addProductById(Long id){
         Product product = productService.getProductById(id);
-        products.add(product);
+        OrderItem orderItem = new OrderItem();
+        orderItem.setProduct(product);
+        items.add(orderItem);
     }
 }
